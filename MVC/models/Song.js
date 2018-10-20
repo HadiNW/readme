@@ -26,10 +26,10 @@ class Song {
     }
 
     static firstOrCreate(released, genre, title, callback) {
-        let seach = `SELECT * FROM songs WHERE released = "${released}" AND genre = "${genre}" AND title = "${title}"`
+        let seach = `SELECT * FROM songs WHERE released = "${released}" AND genre = "${genre}" AND title = "${title}" LIMIT 1`
         db.get(seach, (err, song) => {
             if (err) throw err
-            // jika song sudah ada ?
+            // jika song sudah ada ??
             if (song) {
                 callback(null, `Song already exists with ID ${song.id}`)
             } else {
