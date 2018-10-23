@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head')%>
+<body>
+    <%-include ../partials/menu%>
+    <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    App Form
+                </div>
+                <div class="card-body">
+                        
+                        <% if (err) { 
+                                err.forEach(error =>  {%>                              
+                                <div class="alert alert-danger" role="alert"><%= error.message %></div>
+                        <% })}%>
+                        <form method="POST" action="/employees/add">
+                                <div class="form-group">
+                                  <label for="exampleInputEmail1">First Name</label>
+                                  <input type="text" class="form-control" name="firstName"  placeholder="Enter First Name">                                 
+                                </div>
+                                <div class="form-group">
+                                        <label for="exampleInputEmail1">Last Name</label>
+                                        <input type="text" class="form-control" name="lastName"  placeholder="Enter Last Name">                                 
+                                </div>
+                                <div class="form-group">
+                                        <label for="exampleInputEmail1">Email</label>
+                                        <input type="text" class="form-control" name="email"  placeholder="Enter Email">                                 
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                </div>
+            </div>
+    </div>
+
+    
+    <%-include ../partials/footer%>
+</body>
+</html>

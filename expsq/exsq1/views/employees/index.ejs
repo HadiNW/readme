@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/head')%>
+<body>
+    <%-include ../partials/menu%>
+    <div class="container">
+        <div class="jumbotron jumbotron-fluid text-center">
+            <div class="container">
+              <h1 class="display-4">Employees Data</h1>
+            </div>
+          </div>
+    </div>
+    <div class="container md-3">
+            <a href="/employees/add"  class="btn btn-success">Add new Employee </a>
+    </div>
+    <br>
+    <div class="container">
+            <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Total Points</th>
+                        <th scope="col">Joined</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>    
+                    <% employees.forEach((employee) => { %>
+                    
+                      <tr>
+                        <th scope="row"><%= employee.id %></th>
+                        <td><%= employee.firstName%></td>
+                        <td><%= employee.lastName%></td>                  
+                        <td><%= employee.email%></td> 
+                        <td><%= employee.totalPoints%></td>         
+                        <td><%= helper.getDate(employee.createdAt) %></td>              
+                        <td>
+                            <a href="/employees/<%=employee.id%>/edit" class="btn btn-primary">Edit</a>
+                          <a href="/employees/<%=employee.id%>/delete" class="btn btn-primary">Delete</a>
+                        </td>
+                      </tr>
+                  <%  })%>   
+                    </tbody>
+                  </table>
+    </div>
+    <%-include ../partials/footer%>
+</body>
+</html>

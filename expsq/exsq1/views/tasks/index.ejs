@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/head')%>
+<body>
+    <%-include ../partials/menu%>
+    <div class="container">
+        <div class="jumbotron jumbotron-fluid text-center">
+            <div class="container">
+              <h1 class="display-4">Tasks Data</h1>
+            </div>
+          </div>
+    </div>
+    <div class="container md-3">
+            <a href="/tasks/add"  class="btn btn-success">Add new tasks </a>
+    </div>
+    <br>
+    <div class="container">
+            <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">title</th>
+                        <th scope="col">description</th>
+                        <th scope="col">Employee name</th>
+                        <th scope="col">points</th>
+                        <th scope="col">status</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>    
+                    <% tasks.forEach((task) => { %>
+                    
+                      <tr>
+                        <th scope="row"><%= task.id %></th>
+                        <td><%= task.title%></td>
+                        <td><%= task.description%></td>     
+                        <td><%= task.Employee.getFullName()%></td>  
+                        <td><%= task.points%></td>                    
+                        <td><%= task.getStatus()%></td>             
+                        <td>
+                          <a href="/tasks/<%=task.id%>/complete" class="btn btn-info">Mark as Competed</a>
+                        <%  if (!task.isComplete) { %>
+                             <a href="/tasks/<%=task.id%>/delete" class="btn btn-danger">Delete</a>
+                       <%   } %>
+                         
+                        </td>
+                      </tr>
+                  <%  })%>   
+                    </tbody>
+                  </table>
+    </div> 
+    <nav aria-label="Pagination">
+            <ul class="pagination">
+              <li class="page-item <%= page == 1 ? 'disabled': '' %>">
+                <a class="page-link" href="/tasks?page=<%= page ? Number(page-1):''%>">Previous</a>
+              </li>
+            
+                <% for(let i = 1; i <= offset; i++) {%>
+                <li class="page-item <%= page == i ? 'active':'' %>">
+                  <a class="page-link" href="/tasks?page=<%= i%>"><%= i %></a>
+                </li>          
+              
+               <%}%>
+              <li class="page-item  <%= page == offset ? 'disabled': '' %> ">
+                <a class="page-link" href="/tasks?page=<%= page ? Number(page)+1:''%>">Next</a>
+              </li>
+            </ul>
+          </nav>
+    <%-include ../partials/footer%>
+</body>
+</html>
